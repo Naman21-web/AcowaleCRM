@@ -28,7 +28,8 @@ async function request(path, { method = 'GET', body, auth = false } = {}) {
 }
 
 export const api = {
-  submitFeedback: (payload) => request('/feedback', { method: 'POST', body: payload })
+  submitFeedback: (payload) => request('/feedback', { method: 'POST', body: payload }),
+  login: (username, password) => request('/auth/login', { method: 'POST', body: { username, password } }),
 };
 
 export { getToken };
