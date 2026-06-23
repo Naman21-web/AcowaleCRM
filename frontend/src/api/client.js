@@ -30,6 +30,13 @@ async function request(path, { method = 'GET', body, auth = false } = {}) {
 export const api = {
   submitFeedback: (payload) => request('/feedback', { method: 'POST', body: payload }),
   login: (username, password) => request('/auth/login', { method: 'POST', body: { username, password } }),
+  listFeedback: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return request(`/feedback${qs ? `?${qs}` : ''}`, { auth: true });
+  },
+  updateStatus: (id, status) =>
+    request(`/feedback/${id}/status`, { method: 'PATCH', body: { status }, auth: true }),
+  analyticsSummary: () => request('/analytics/summary', { auth: true }),
 };
 
 export { getToken };
