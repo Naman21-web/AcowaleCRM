@@ -5,7 +5,9 @@ function getToken() {
 }
 
 async function request(path, { method = 'GET', body, auth = false } = {}) {
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = { 'Content-Type': 'application/json',
+     'ngrok-skip-browser-warning': 'true'
+   };
   if (auth) {
     const token = getToken();
     if (token) headers.Authorization = `Bearer ${token}`;
