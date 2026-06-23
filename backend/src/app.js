@@ -6,6 +6,8 @@ const logger = require('./utils/logger');
 
 const { apiLimiter } = require('./middleware/rateLimiter');
 
+const authRoutes = require('./routes/authRoutes');
+
 function createApp() {
   const app = express();
 
@@ -31,6 +33,7 @@ function createApp() {
   );
 
   app.use('/api', apiLimiter);
+  app.use('/api/auth', authRoutes);
 
   app.get('/', (req, res) => {
     res.json({ name: 'Acowale CRM API', status: 'running', docs: '/health' });
