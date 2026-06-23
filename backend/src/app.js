@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const logger = require('./utils/logger');
 
 const { apiLimiter } = require('./middleware/rateLimiter');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const authRoutes = require('./routes/authRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
