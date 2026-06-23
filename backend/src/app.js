@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
 
+const { apiLimiter } = require('./middleware/rateLimiter');
+
 function createApp() {
   const app = express();
 
@@ -27,6 +29,8 @@ function createApp() {
       stream: { write: (msg) => logger.info(msg.trim()) },
     })
   );
+
+  app.use('/api', apiLimiter);
 
   app.get('/', (req, res) => {
     res.json({ name: 'Acowale CRM API', status: 'running', docs: '/health' });
